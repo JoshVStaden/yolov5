@@ -20,6 +20,7 @@ from multiprocessing.pool import ThreadPool
 from pathlib import Path
 from subprocess import check_output
 from zipfile import ZipFile
+from sys import platform as os_platform
 
 import cv2
 import numpy as np
@@ -121,11 +122,9 @@ class Timeout(contextlib.ContextDecorator):
         raise TimeoutError(self.timeout_message)
 
     def __enter__(self):
-        signal.signal(signal.SIGALRM, self._timeout_handler)  # Set handler for SIGALRM
-        signal.alarm(self.seconds)  # start countdown for SIGALRM to be raised
+        pass
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        signal.alarm(0)  # Cancel SIGALRM if it's scheduled
         if self.suppress and exc_type is TimeoutError:  # Suppress TimeoutError
             return True
 

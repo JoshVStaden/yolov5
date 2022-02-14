@@ -79,6 +79,8 @@ def yolov5s(pretrained=True, channels=3, classes=80, autoshape=True, verbose=Tru
     # YOLOv5-small model https://github.com/ultralytics/yolov5
     return _create('yolov5s', pretrained, channels, classes, autoshape, verbose, device)
 
+def yolopistol(pretrained=True, channels=3, classes=1, autoshape=True, verbose=True, device=None):
+    return _create('yolopistol', pretrained, channels, classes, autoshape, verbose, device)
 
 def yolov5m(pretrained=True, channels=3, classes=80, autoshape=True, verbose=True, device=None):
     # YOLOv5-medium model https://github.com/ultralytics/yolov5
