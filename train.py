@@ -31,6 +31,7 @@ from torch.cuda import amp
 from torch.nn.parallel import DistributedDataParallel as DDP
 from torch.optim import SGD, Adam, AdamW, lr_scheduler
 from tqdm import tqdm
+import config
 
 FILE = Path(__file__).resolve()
 ROOT = FILE.parents[0]  # YOLOv5 root directory
@@ -452,13 +453,13 @@ def train(hyp,  # path/to/hyp.yaml or hyp dictionary
 
 def parse_opt(known=False):
     parser = argparse.ArgumentParser()
-    parser.add_argument('--weights', type=str, default='', help='initial weights path')
-    parser.add_argument('--cfg', type=str, default='models/yolopistol.yaml', help='model.yaml path')
-    parser.add_argument('--data', type=str, default=ROOT / '../../Datasets/Pistols/data.yaml', help='dataset.yaml path')
-    parser.add_argument('--hyp', type=str, default=ROOT / 'data/hyps/hyp.scratch.yaml', help='hyperparameters path')
-    parser.add_argument('--epochs', type=int, default=300)
-    parser.add_argument('--batch-size', type=int, default=128, help='total batch size for all GPUs, -1 for autobatch')
-    parser.add_argument('--imgsz', '--img', '--img-size', type=int, default=64, help='train, val image size (pixels)')
+    parser.add_argument('--weights', type=str, default=config.INITAL_WEIGHTS, help='initial weights path')
+    parser.add_argument('--cfg', type=str, default=config.MODEL_CONFIG, help='model.yaml path')
+    parser.add_argument('--data', type=str, default=ROOT / config.DATASET_DIR, help='dataset.yaml path')
+    parser.add_argument('--hyp', type=str, default=ROOT / config.HYPERPARAMS, help='hyperparameters path')
+    parser.add_argument('--epochs', type=int, default=config.EPOCHS)
+    parser.add_argument('--batch-size', type=int, default=config.BATCH_SIZE, help='total batch size for all GPUs, -1 for autobatch')
+    parser.add_argument('--imgsz', '--img', '--img-size', type=int, default=config.IMAGE_SIZE, help='train, val image size (pixels)')
     parser.add_argument('--rect', action='store_true', help='rectangular training')
     parser.add_argument('--resume', nargs='?', const=True, default=False, help='resume most recent training')
     parser.add_argument('--nosave', action='store_true', help='only save final checkpoint')

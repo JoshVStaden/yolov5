@@ -1,0 +1,5 @@
+train: E:/MachineLearning/Datasets/Pistols/train
+val: E:/MachineLearning/Datasets/Pistols/test
+
+nc: 1
+names: ['pistol']
